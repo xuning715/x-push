@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="weixinConstants" class="com.x.push.weixin.conf.WeixinConfig">
+		<constructor-arg name="token" value="${wx.token}" />
+		<constructor-arg name="appId" value="${wx.appId}" />
+		<constructor-arg name="appSecret" value="${wx.appSecret}" />
+		<constructor-arg name="encodingAesKey" value="${wx.encodingAesKey}" />
+		<constructor-arg name="encryptMessage" value="${wx.encryptMessage}" />
+	</bean>
+
+	<bean id="wxTemplateConstants" class="com.x.push.weixin.conf.WxTemplateConstants">
+		<property name="pushCarIntentionModel" value="${wx.msgtm.pushCarIntentionModel}" />
+	</bean>
+</beans>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<bean id="jpushClientUtil" class="com.x.push.jpush.util.JPushClientUtil">
+		<constructor-arg name="appKey" value="${jpush.appKey}" />
+		<constructor-arg name="appSecret" value="${jpush.appSecret}" />
+		<constructor-arg name="apnsProduction" value="${jpush.apnsProduction}" />
+	</bean>
+
+	<bean id="financeJpushClientUtil" class="com.x.push.jpush.util.JPushClientUtil">
+		<constructor-arg name="appKey" value="${jpush.finance.appKey}" />
+		<constructor-arg name="appSecret" value="${jpush.finance.appSecret}" />
+		<constructor-arg name="apnsProduction" value="${jpush.finance.apnsProduction}" />
+	</bean>
+</beans>

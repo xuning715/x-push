@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+	<bean id="constant" class="com.x.erp.util.Constant">
+		<property name="erpContextPath" value="${constant.erpContextPath}" />
+		<property name="crmContextPath" value="${constant.crmContextPath}" />
+		<property name="wxContextPath" value="${constant.wxContextPath}" />
+		<property name="fdfsContextPath" value="${constant.fdfsContextPath}" />
+	</bean>
+
+	<bean id="smsConstant" class="com.x.push.sms.conf.SmsConstant">
+		<property name="carOutOvertimeMobile" value="${sms.carOutOvertimeMobile}" />
+	</bean>
+
+</beans>

@@ -1,0 +1,18 @@
+develop:
+    script:
+    - rm -rf /opt/apache-maven-3.5.2/m2/com/x/*
+    - mvn clean package -Dmaven.test.skip=true
+    - ssh provider@192.168.0.192 '/opt/provider/x-push/killAndRename.sh'
+    - scp -r ./target/x-push-1.0-SNAPSHOT.jar provider@192.168.0.192:/opt/provider/x-push
+    - ssh provider@192.168.0.192 '/opt/provider/x-push/start.sh'
+    - mvn sonar:sonar -Dsonar.host.url=http://sonar.anpxd.com -Dsonar.login=d7e3978cc8bdb7d349f456a808e3cc6a08734cd4
+    only:
+    - develop
+master:
+    script:
+    - mvn clean package -Dmaven.test.skip=true
+    - ssh gitlab-runner@47.95.122.117 '~/push/push-service/backup.sh'
+    - scp -r ./target/x-push-1.0-SNAPSHOT.jar gitlab-runner@47.95.122.117:~/push/push-service
+    - ssh gitlab-runner@47.95.122.117 '~/push/push-service/deploy.sh'
+    only:
+    - master

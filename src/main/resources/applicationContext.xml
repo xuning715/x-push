@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" value="file:../conf/conf-push.properties" />
+	</bean>
+	<import resource="applicationContext-constant.xml" />
+	<import resource="applicationContext-executor.xml" />
+	<!--<import resource="applicationContext-redis.xml" />-->
+	<import resource="applicationContext-jpush.xml" />
+	<import resource="applicationContext-sms.xml" />
+	<import resource="applicationContext-component.xml" />
+	<import resource="applicationContext-weixin.xml" />
+	<import resource="applicationContext-rocketmq-consumer.xml" />
+	<import resource="applicationContext-rocketmq-producer.xml" />
+</beans>

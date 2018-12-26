@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+	<!-- 询价记录之－极光推送 -->
+	<bean id="insertIntentionModelConsumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="pushConsumerJPushIntention" />
+		<property name="consumerTopicAndTags" value="CRM_PUSH:PUSH_INTENTION"/>
+		<property name="service" ref="jpushService"/>
+		<property name="methodName" value="jpushIntention"/>
+		<property name="paramType" value="com.x.crm.payload.IntentionMsg"/>
+	</bean>
+	<!-- 询价记录之－微信推送 -->
+	<bean id="pushCarIntentionModelConsumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="pushConsumerPushWeixinIntention" />
+		<property name="consumerTopicAndTags" value="CRM_PUSH:PUSH_INTENTION"/>
+		<property name="service" ref="weixinService"/>
+		<property name="methodName" value="pushCarIntentionMsg"/>
+		<property name="paramType" value="com.x.crm.payload.IntentionMsg"/>
+	</bean>
+
+	<!--车辆入库 极光推送-->
+	<bean id="updateCarStockState20Consumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="erpConsumerErpCarStockState20" />
+		<property name="consumerTopicAndTags" value="ERP_CAR:CAR_STOCK_STATE_20"/>
+		<property name="service" ref="jpushService"/>
+		<property name="methodName" value="updateCarStockState20"/>
+		<property name="paramType" value="com.x.erp.payload.CarStateMsg"/>
+	</bean>
+
+	<!--车辆入库审核失败 极光推送-->
+	<bean id="updateCarStockState0Consumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="erpConsumerErpCarStockState0" />
+		<property name="consumerTopicAndTags" value="ERP_CAR:CAR_STOCK_STATE_0"/>
+		<property name="service" ref="jpushService"/>
+		<property name="methodName" value="updateCarStockState0"/>
+		<property name="paramType" value="com.x.erp.payload.CarStateMsg"/>
+	</bean>
+	
+	<!--车辆上架审核失败 极光推送-->
+	<bean id="updateCarSaleState0Consumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="erpConsumerErpCarSaleState0" />
+		<property name="consumerTopicAndTags" value="ERP_CAR:CAR_SALE_STATE_0"/>
+		<property name="service" ref="jpushService"/>
+		<property name="methodName" value="updateCarSaleState0"/>
+		<property name="paramType" value="com.x.erp.payload.CarStateMsg"/>
+	</bean>
+
+	<!--车辆检测已派单 极光推送-->
+	<bean id="updateDetectIONState10Consumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="erpConsumerErpCarDetectState10" />
+		<property name="consumerTopicAndTags" value="ERP_CAR:DETECTION_STATE_10"/>
+		<property name="service" ref="jpushService"/>
+		<property name="methodName" value="updateDetectIONState10"/>
+		<property name="paramType" value="com.x.erp.payload.DetectionMsg"/>
+	</bean>
+
+	<!--车辆检测完毕 极光推送-->
+	<bean id="updateDetectIONState20Consumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="erpConsumerErpCarDetectState20" />
+		<property name="consumerTopicAndTags" value="ERP_CAR:DETECTION_STATE_20"/>
+		<property name="service" ref="jpushService"/>
+		<property name="methodName" value="updateDetectIONState20"/>
+		<property name="paramType" value="com.x.erp.payload.DetectionMsg"/>
+	</bean>
+	
+	<!--车辆临时出库审核未通过 极光推送-->
+	<bean id="updateCarSiteState410Consumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="erpConsumerErpCarSiteState410" />
+		<property name="consumerTopicAndTags" value="ERP_CAR:CAR_SITE_STATE_410"/>
+		<property name="service" ref="jpushService"/>
+		<property name="methodName" value="updateCarSiteState410"/>
+		<property name="paramType" value="com.x.erp.payload.CarStateMsg"/>
+	</bean>
+	<!--车辆临时出库审核通过 极光推送-->
+	<bean id="updateCarSiteState430Consumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="erpConsumerErpCarSiteState430" />
+		<property name="consumerTopicAndTags" value="ERP_CAR:CAR_SITE_STATE_430"/>
+		<property name="service" ref="jpushService"/>
+		<property name="methodName" value="updateCarSiteState430"/>
+		<property name="paramType" value="com.x.erp.payload.CarStateMsg"/>
+	</bean>
+	
+	<!--车辆临时出场超时 极光短信-->
+	<bean id="sendMsgCarOutOvertimeTaskConsumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="erpConsumerErpCarOutOvertime" />
+		<property name="consumerTopicAndTags" value="ERP_CAR:CAR_OUT_OVERTIME"/>
+		<property name="service" ref="smsService"/>
+		<property name="methodName" value="sendMsgCarOutOvertimeTask"/>
+		<property name="paramType" value="com.x.erp.payload.CarOutMsg"/>
+	</bean>
+
+    <!--车辆临时出场超时 极光推送-->
+    <bean id="sendMsgCarOutOvertimeTaskConsumer2" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+        <property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+        <property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+        <property name="consumerGroup" value="erpConsumerErpCarOutOvertime2" />
+        <property name="consumerTopicAndTags" value="ERP_CAR:CAR_OUT_OVERTIME"/>
+        <property name="service" ref="jpushService"/>
+        <property name="methodName" value="sendMsgCarOutOvertimeTask2"/>
+        <property name="paramType" value="com.x.erp.payload.CarOutMsg"/>
+    </bean>
+
+	<!--车辆返场短信 极光短信-->
+	<bean id="sendMsgCarOutReturnTaskConsumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="erpConsumerErpCarOutReturn" />
+		<property name="consumerTopicAndTags" value="ERP_CAR:CAR_OUT_RETURN"/>
+		<property name="service" ref="smsService"/>
+		<property name="methodName" value="sendMsgCarOutReturnTask"/>
+		<property name="paramType" value="com.x.erp.payload.CarOutMsg"/>
+	</bean>
+
+	<!--车辆返场 极光推送-->
+	<bean id="sendMsgCarOutReturnTaskConsumer2" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="erpConsumerErpCarOutReturn2" />
+		<property name="consumerTopicAndTags" value="ERP_CAR:CAR_OUT_RETURN"/>
+		<property name="service" ref="jpushService"/>
+		<property name="methodName" value="sendMsgCarOutReturnTask2"/>
+		<property name="paramType" value="com.x.erp.payload.CarOutMsg"/>
+	</bean>
+
+	<!--密码重置获取手机验证码 极光短信-->
+	<bean id="sendMsgGetValidateCodeTaskConsumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="erpConsumerValidateCode" />
+		<property name="consumerTopicAndTags" value="ERP_CAR:FIND_BACK_PASSWORD"/>
+		<property name="service" ref="smsService"/>
+		<property name="methodName" value="sendMsgGetValidateCodeTask"/>
+		<property name="paramType" value="com.x.erp.payload.SmsCodeMsg"/>
+	</bean>
+
+	<!--C端客户登录获取手机验证码 极光短信-->
+	<bean id="clientLoginGetValidateCodeTaskConsumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="clientLoginConsumerValidateCode" />
+		<property name="consumerTopicAndTags" value="CLIENT:CLIENT_LOGIN_OPR"/>
+		<property name="service" ref="smsService"/>
+		<property name="methodName" value="clientLoginGetValidateCodeTask"/>
+		<property name="paramType" value="com.x.client.payload.ClientSmsCodeMsg"/>
+	</bean>
+
+	<!--车赢SDK 极光推送-->
+	<bean id="sendSDKTohopUserConsumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="erpConsumerSendSDK" />
+		<property name="consumerTopicAndTags" value="ERP_CAR:SEND_SDK_TO_SHOPUSER"/>
+		<property name="service" ref="jpushService"/>
+		<property name="methodName" value="sendSDKToShopUser"/>
+		<property name="paramType" value="com.x.erp.payload.CyAuctionNoticeMsg"/>
+	</bean>
+
+	<!--授信信息，审贷会审核通过 极光短信-->
+	<bean id="updateCreditState610Consumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="financeConsumerCreditState610" />
+		<property name="consumerTopicAndTags" value="ERP_MORTGAGE_CREDIT:CREDIT_STATE_610"/>
+		<property name="service" ref="smsService"/>
+		<property name="methodName" value="updateCreditState610"/>
+		<property name="paramType" value="com.x.finance.payload.CreditAuditMessage"/>
+	</bean>
+	<!--授信信息，已成功有效授信 极光短信-->
+	<bean id="updateCreditState710Consumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="financeConsumerCreditState710" />
+		<property name="consumerTopicAndTags" value="ERP_MORTGAGE_CREDIT:CREDIT_STATE_710"/>
+		<property name="service" ref="smsService"/>
+		<property name="methodName" value="updateCreditState710"/>
+		<property name="paramType" value="com.x.finance.payload.CreditAuditMessage"/>
+	</bean>
+	<!--授信信息，待审查12小时短信提醒 极光短信-->
+	<bean id="sendMessageRemindDSC410Consumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="financeConsumerCreditSendMessage410" />
+		<property name="consumerTopicAndTags" value="ERP_MORTGAGE_CREDIT:CREDIT_SEND_MESSAGE_410"/>
+		<property name="service" ref="smsService"/>
+		<property name="methodName" value="sendMessageRemindDSC410"/>
+		<property name="paramType" value="com.x.finance.payload.CreditAuditMessage"/>
+	</bean>
+
+	<!--置换复核拒绝 极光推送-->
+	<bean id="updateSubstitutionReviewNgConsumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="financeConsumerSubstitutionReviewNg" />
+		<property name="consumerTopicAndTags" value="ERP_MORTGAGE_SUBSTITUTION:SUBSTITUTION_REVIEW_NG"/>
+		<property name="service" ref="jpushService"/>
+		<property name="methodName" value="updateSubstitutionReviewNg"/>
+		<property name="paramType" value="com.x.finance.payload.MQMessagePayLoad"/>
+	</bean>
+
+	<!--置换复核通过 极光推送-->
+	<bean id="updateSubstitutionReviewPassConsumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="financeConsumerSubstitutionReviewPass" />
+		<property name="consumerTopicAndTags" value="ERP_MORTGAGE_SUBSTITUTION:SUBSTITUTION_REVIEW_PASS"/>
+		<property name="service" ref="jpushService"/>
+		<property name="methodName" value="updateSubstitutionReviewPass"/>
+		<property name="paramType" value="com.x.finance.payload.MQMessagePayLoad"/>
+	</bean>
+
+	<!--质押订单拒绝 极光推送-->
+	<bean id="updateOrderCheckNgConsumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="financeConsumerOrderCheckNg" />
+		<property name="consumerTopicAndTags" value="ERP_MORTGAGE_ORDER:ORDER_CHECK_NG"/>
+		<property name="service" ref="jpushService"/>
+		<property name="methodName" value="updateOrderCheckNg"/>
+		<property name="paramType" value="com.x.finance.payload.MQMessagePayLoad"/>
+	</bean>
+
+	<!--盘库提醒 极光推送-->
+	<bean id="sendAssignRemindMessageConsumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="financeConsumerAssignRemind" />
+		<property name="consumerTopicAndTags" value="ERP_MORTGAGE_ASSIGN:ASSIGN_REMIND"/>
+		<property name="service" ref="jpushService"/>
+		<property name="methodName" value="sendAssignRemindMessage"/>
+		<property name="paramType" value="com.x.finance.payload.MQMessagePayLoad"/>
+	</bean>
+
+	<!--盘库提醒 极光推送-->
+	<bean id="sendAssignNeedTreatedConsumer" class="com.x.rocketmq.RocketMqConsumer" init-method="init" destroy-method="shutdown">
+		<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />
+		<property name="instanceName" value="${rocketmq.consumerInstanceName}" />
+		<property name="consumerGroup" value="financeConsumerAssignNeedTreated" />
+		<property name="consumerTopicAndTags" value="ERP_MORTGAGE_ASSIGN:ASSIGN_NEED_TREATED"/>
+		<property name="service" ref="jpushService"/>
+		<property name="methodName" value="sendAssignNeedTreated"/>
+		<property name="paramType" value="com.x.finance.payload.MQMessagePayLoad"/>
+	</bean>
+</beans>
